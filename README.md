@@ -7,13 +7,13 @@ Setup:
 4. Execute "DB_Grouping.exe" to start entering data.
 
 "DB_Grouping.exe" stores all student information in a text file "Compdata.txt" in the folder "Data files".
-"Compdata.txt" acts as a database when used by DB_Grouping.exe.
+"Compdata.txt" acts as a database.
 
 Commands:
 
 list: 
 List all student names, schools and corresponding student IDs.
-A '*' at the beginning of a name indicates a seed player.
+A '\*' at the beginning of a name indicates a seed player.
 
 search:
 Find information of a student based on his/her student ID.
@@ -40,4 +40,6 @@ Creates a tournament bracket based on the current student data.
 After a bracket is created, you need to confirm whether the generated bracket should be used.
 If so, a new text file "Competitor Results.txt" will be created to store competition data.
 After a bracket is generated, "DB_Grouping.exe" CANNOT be used to edit student information.
+
+
 
