@@ -1,34 +1,34 @@
-Derek Hon
+School D1
 School D
 s000
-*Quinson Hon
+Student A1
 School A
 s001
-*Nathan Hon
+*Student A2
 School A
 s002
-Jimmy Wong
+Student B1
 School B
 s003
-Alex Tsui
+Student C1
 School C
 s004
-Jeffrey Chan
+*Student B2
 School B
 s007
-*Cherie Ma
+*Student B3
 School B
 s010
-James Li
+Student A3
 School A
 s011
-Samuel Yao
+Student C2
 School C
 s012
-Arthur Lau
+Student C3
 School C
 s013
-Henry Au Yong
+Student A4
 School A
 s025
 Tester 1
