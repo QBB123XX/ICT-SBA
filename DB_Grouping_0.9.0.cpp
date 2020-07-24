@@ -259,8 +259,8 @@ int commands() {
     //command validation
 	while(cmds.count(curr) == 0) {
  	    cin.clear();
- 	    cin.ignore(999,'\n');
  	    cout<<"Invalid command.\n";
+        getline(cin, curr);
     }
     op = cmds[curr];
 	switch (op) {
