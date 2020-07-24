@@ -98,9 +98,9 @@ int search() { //executes when 'search' function is typed
 }
 
 void rm_seed(int idx) { //removes seed status of a student
-    bool found;
     if (std_list[idx].name[0] == '*') {
         std_list[idx].name.erase(std_list[idx].name.begin());
+        bool found;
 	    for (int i = 0; i < seed.size(); i++) {
             //linear search for seed
 		    if (seed[i] == target.sid) {
@@ -109,7 +109,8 @@ void rm_seed(int idx) { //removes seed status of a student
 			    break; 
 		    }
 	    }
-        cout << "Seed info of competitor removed.\n";
+        if (found) cout << "Seed info of competitor removed.\n";
+        else cout << "Error: seed array not in sync\n";
     } else cout << "The competitor was not a top seed.\n";
 } 
 
@@ -118,7 +119,7 @@ void add_seed() { //executes when a new student is added or when a student info 
     string inp = "";
     char first_chr = ' ';
     //input validation
-    while (first_chr != 'y' || first_chr != 'n') {
+    while (first_chr != 'y' && first_chr != 'n') {
         getline (cin, inp);
         first_chr = tolower(inp[0]);
     }

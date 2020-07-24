@@ -1,7 +1,7 @@
 School D1
 School D
 s000
-*Student A1
+Student A1
 School A
 s001
 *Student A2
@@ -13,7 +13,7 @@ s003
 Student C1
 School C
 s004
-Student B2
+*Student B2
 School B
 s007
 *Student B3
