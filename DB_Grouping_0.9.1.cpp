@@ -39,7 +39,8 @@ struct {
     }
 } school_seed_ascend;
 
-int bin_search(vector<student> list, string id) { //searches for idx of student in list given student id
+//searches for idx of student in list given student id
+int bin_search(vector<student> list, string id) { 
 	//binary search
     int l = 0, r = stdcnt-1, mid;
 	while (l <= r) {
@@ -84,10 +85,12 @@ void list_students () {
 int search() { //executes when 'search' function is typed
 	cout << "Enter student number\n";
 	getline(cin, target.sid);
-	target_idx = bin_search(std_list, target.sid);
+    //position of target student in std_list
+	target_idx = bin_search(std_list, target.sid); 
 	if (target_idx == stdcnt) {
 		cout << "Student not found.\n";
 	} else {
+        //student found
 		target.name = std_list[target_idx].name;
 		target.school = std_list[target_idx].school;
 		cout << "Student found.\n";
