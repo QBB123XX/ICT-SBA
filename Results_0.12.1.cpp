@@ -230,6 +230,10 @@ void update() {
             cout << "Invalid input. Please try again." << '\n';
         }
     }
+    if (bracket[match-1].s1 -> sid == "bye" || bracket[match-1].s2 -> sid == "bye") {
+        cout << "This result cannot be changed.\n";
+        return;
+    }
     cout << "Winner?\n";
     valid = false;
     while (!valid) {
@@ -442,12 +446,20 @@ void query() {
                 curr_round_file >> winner;
                 curr_round_file.get();
                 curr_round_file.get();
-                temp_idx = bin_search(std_list, s1);
-                ref_s1 = &(std_list[temp_idx]);
-                temp_idx = bin_search(std_list, s2);
-                ref_s2 = &(std_list[temp_idx]);
-                curr_match.s1 = ref_s1;
-                curr_match.s2 = ref_s2;
+                if (s1 == "bye") {
+                    curr_match.s1 = &bye;
+                } else {
+                    temp_idx = bin_search(std_list, s1);
+                    ref_s1 = &(std_list[temp_idx]);
+                    curr_match.s1 = ref_s1;
+                }
+                if (s2 == "bye") {
+                    curr_match.s2 = &bye;
+                } else {
+                    temp_idx = bin_search(std_list, s2);
+                    ref_s2 = &(std_list[temp_idx]);
+                    curr_match.s2 = ref_s2;
+                }
                 curr_match.winner = winner;
                 curr_bracket.push_back(curr_match);
             }
