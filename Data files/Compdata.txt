@@ -43,9 +43,3 @@ t002
 Tester 3
 School T
 t003
-<<<<<<< Updated upstream
-Tester 4
-School T
-t004
-=======
->>>>>>> Stashed changes
