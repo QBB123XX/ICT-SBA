@@ -404,14 +404,6 @@ void make_bracket(int l, int r) {
             }
         }
     }
-    //debugging code (remove later)
-    cout << l << ' ' << r << '\n';
-    cout << distinct << '\n';
-    for (string x: schools) {
-        cout << x << ' ';
-    }
-    //end debugging code
-    cout << '\n';
     if (distinct) {
         //randomise groups
         group_randomize(l, r);
@@ -502,7 +494,6 @@ int main() {
         cout << '\n';
 		end_prog = commands();
 	} while (end_prog > 0);
-    cout << "Finishing program...\n";
 	finish();
     if (end_prog == -1) create_tournament_bracket();
     cout << "All actions processed. You may close this program.\n";
