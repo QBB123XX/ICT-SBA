@@ -481,7 +481,7 @@ void create_tournament_bracket() {
 }
 
 int main() {
-    srand(time(NULL));
+    srand(time(NULL)); 
 	op = setup();
     switch (op) {
         case 1:
