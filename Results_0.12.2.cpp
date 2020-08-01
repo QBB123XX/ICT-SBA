@@ -65,7 +65,8 @@ int next_power(int num) {
     return ((num ^ (num >> 1)) << 1);
 }
 
-void modify_rivals(student* winner, student* loser) { //change status of rival in student (win/lose)
+//change status of rival in student (win/lose)
+void modify_rivals(student* winner, student* loser) {
     winner -> rivals.back() = "*" + loser -> sid;
     if (loser != &bye) {
         loser -> rivals.back() = "-" + winner -> sid;
@@ -249,7 +250,7 @@ void update() {
     bracket[match-1].winner = winner;
     if (winner == 1) {
         modify_rivals(bracket[match-1].s1, bracket[match-1].s2);
-    } else {
+    } else if (winner == 2) {
         modify_rivals(bracket[match-1].s2, bracket[match-1].s1);
     }
     save_bracket(std_cnt);
