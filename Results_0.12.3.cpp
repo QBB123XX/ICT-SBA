@@ -37,13 +37,6 @@ student make_bye() {
 
 student bye = make_bye(); 
 
-void clear_screen() {
-    const int times = 1;
-    for (int i = 0; i < times; i++) {
-        cout << '\n';
-    }
-} 
-
 int bin_search(vector<student> list, string id) {
 	int l = 0, r = list.size()-1, mid;
 	while (l <= r) {
@@ -52,7 +45,7 @@ int bin_search(vector<student> list, string id) {
 		else if (id > list[mid].sid) l = mid + 1;
 		else return mid;
 	}
-	return -1;
+	return std_cnt;
 }
 
 int next_power(int num) {
@@ -65,7 +58,8 @@ int next_power(int num) {
     return ((num ^ (num >> 1)) << 1);
 }
 
-void modify_rivals(student* winner, student* loser) { //change status of rival in student (win/lose)
+//change status of rival in student (win/lose)
+void modify_rivals(student* winner, student* loser) {
     winner -> rivals.back() = "*" + loser -> sid;
     if (loser != &bye) {
         loser -> rivals.back() = "-" + winner -> sid;
@@ -184,7 +178,7 @@ int setup() { //prepares std_list & bracket for file input
 }
 
 void show_bracket(vector<match> bracket, int std_cnt) { //shows results of a round
-    clear_screen();
+    cout << '\n';
     switch (std_cnt) {
         case 2:
             cout << "Finals\n";
@@ -230,6 +224,10 @@ void update() {
             cout << "Invalid input. Please try again." << '\n';
         }
     }
+    if (bracket[match-1].s1 -> sid == "bye" || bracket[match-1].s2 -> sid == "bye") {
+        cout << "This result cannot be changed.\n";
+        return;
+    }
     cout << "Winner?\n";
     valid = false;
     while (!valid) {
@@ -245,7 +243,7 @@ void update() {
     bracket[match-1].winner = winner;
     if (winner == 1) {
         modify_rivals(bracket[match-1].s1, bracket[match-1].s2);
-    } else {
+    } else if (winner == 2) {
         modify_rivals(bracket[match-1].s2, bracket[match-1].s1);
     }
     save_bracket(std_cnt);
@@ -266,7 +264,7 @@ void make_next_bracket(vector<match> &bracket, int curr_std_cnt) {
         winners.s1 = bracket[i].s1; 
         losers.s1 = bracket[i].s2;
         if (bracket[i].winner == 2) {
-            swap(winners.s1, losers.s1);
+            swap(winners.s1, losers.s1);        
         } 
         modify_rivals(winners.s1, losers.s1);
         winners.s2 = bracket[i+1].s1;
@@ -282,7 +280,8 @@ void make_next_bracket(vector<match> &bracket, int curr_std_cnt) {
         advanced.push_back(winners);
         dropped.push_back(losers);
     }
-    advanced.insert(advanced.end(), dropped.begin(), dropped.end()); //combine two lists
+    //combine two lists
+    advanced.insert(advanced.end(), dropped.begin(), dropped.end()); 
     std_cnt /= 2;
     bracket = advanced;
     save_bracket(std_cnt);
@@ -340,14 +339,6 @@ void list_students () {
     }
 }
 
-student query_std(string sid) {
-    student temp_std;
-    int idx = bin_search(std_list, sid);
-    if (idx == -1) return bye;
-    temp_std = std_list[idx];
-    return temp_std;
-}
-
 void query() {
     cout << "Query by student/round?\n";
     string op;
@@ -360,12 +351,16 @@ void query() {
     if (op == "student") {
         list_students();
         cout << "\nEnter student number\n";
-        string id;
-        getline(cin, id);
-        student temp_std = query_std(id);
-        if (temp_std.sid == "bye") {
+        string sid;
+        getline(cin, sid);
+        student temp_std;
+        int idx = bin_search(std_list, sid);
+        if (idx == std_cnt) {
             cout << "Student not found.\n";
-        } else {
+            return;
+        }
+        temp_std = std_list[idx];
+        {
             int temp_std_cnt = next_power(std_list.size());
             cout << "Name: " << temp_std.name << '\n';
             cout << "School: " << temp_std.school << '\n';
@@ -442,12 +437,20 @@ void query() {
                 curr_round_file >> winner;
                 curr_round_file.get();
                 curr_round_file.get();
-                temp_idx = bin_search(std_list, s1);
-                ref_s1 = &(std_list[temp_idx]);
-                temp_idx = bin_search(std_list, s2);
-                ref_s2 = &(std_list[temp_idx]);
-                curr_match.s1 = ref_s1;
-                curr_match.s2 = ref_s2;
+                if (s1 == "bye") {
+                    curr_match.s1 = &bye;
+                } else {
+                    temp_idx = bin_search(std_list, s1);
+                    ref_s1 = &(std_list[temp_idx]);
+                    curr_match.s1 = ref_s1;
+                }
+                if (s2 == "bye") {
+                    curr_match.s2 = &bye;
+                } else {
+                    temp_idx = bin_search(std_list, s2);
+                    ref_s2 = &(std_list[temp_idx]);
+                    curr_match.s2 = ref_s2;
+                }
                 curr_match.winner = winner;
                 curr_bracket.push_back(curr_match);
             }

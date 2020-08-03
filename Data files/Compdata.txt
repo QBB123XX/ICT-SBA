@@ -28,6 +28,9 @@ s012
 Student C3
 School C
 s013
+Student C4
+School C
+s014
 Student A4
 School A
 s025
@@ -40,6 +43,3 @@ t002
 Tester 3
 School T
 t003
-Tester 4
-School T
-t004
